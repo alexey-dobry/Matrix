@@ -8,13 +8,16 @@ class Matrix:
         self.matrix = self.create_matrix(values,m,n)
 
     @staticmethod
-    def create_matrix(values,m,n):
+    def create_matrix(values, m, n):
         _matrix = dict()
-        i = 0
-        for stroka in range(1,m + 1):
-            for stolb in range(1,n + 1):
-                _matrix[str(stroka) + str(stolb)] = values[i]
-                i += 1
+        if len(values) != 1:
+            i = 0
+            for stroka in range(1, m + 1):
+                for stolb in range(1, n + 1):
+                    _matrix[str(stroka) + str(stolb)] = values[i]
+                    i += 1
+        else:
+            _matrix['11'] = values[0]
         return _matrix
 
     def __add__(self,obj):
