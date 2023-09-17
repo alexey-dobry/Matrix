@@ -44,3 +44,5 @@ class Determinant:
     def check_for_square(m,n):
         if m != n: raise MatrixNotSquareError
 
+
+
