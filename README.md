@@ -1,2 +1,2 @@
 # Matrix
-This is implentation of matrix on Python
+This is implementation of matrix on Python
