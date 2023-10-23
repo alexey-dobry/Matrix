@@ -1,7 +1,7 @@
-class MatrixSizeDifferentError(Exception):
+class MatrixNotSquareError(Exception):
     pass
 
-class MatrixNotSquareError(Exception):
+class MatrixSizeDifferentError(Exception):
     pass
 
 class Matrix:
@@ -45,6 +45,35 @@ class Matrix:
                     print_result.append('\n')
         return ''.join(print_result)
 
+
+    def __sub__(self,obj):
+        if obj.stroka != self.stroka or obj.stolb != self.stolb:
+            raise MatrixSizeDifferentError
+
+        else:
+            __values = list()
+            for stroka in range(1, self.stroka + 1):
+                for stolb in range(1, self.stolb + 1):
+                    new_value = self.matrix[str(stroka) + str(stolb)] - obj.matrix[str(stroka) + str(stolb)]
+                    __values.append(new_value)
+
+            return Matrix(tuple(__values), self.stroka, self.stolb)
+
+    def __mul__(self,obj):
+        __values = list()
+        summa = 0
+        if self.stolb == obj.stroka:
+            for i in range(1,self.stroka+1):
+                for j in range(1, obj.stolb+1):
+                    for k in range(1, self.stolb + 1):
+                        index1 = str(i) + str(k)
+                        index2 = str(k) + str(j)
+                        summa = summa + self.matrix[index1] * obj.matrix[index2]
+                    __values.append(summa)
+                    summa = 0
+
+        return Matrix(tuple(__values),self.stroka,obj.stolb)
+
 class Determinant:
     def __init__(self,obj):
         self.matrix = obj.matrix
@@ -87,6 +116,14 @@ class Determinant:
     @staticmethod
     def check_for_square(m,n):
         if m != n: raise MatrixNotSquareError
+
+A = Matrix((5,2,0,10,3,5,2,5,20,0,0,0),3,4)
+
+B = Matrix((1.2,0.5,2.8,0.4,5,1,2,1.5),4,2)
+
+C = A * B
+
+print(C)
 
 
 
